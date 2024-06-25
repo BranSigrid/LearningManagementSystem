@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMSkills</title>
+    <!-- Logo Website -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            background-color: #555;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            z-index: 1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            text-align: center;
+            position: relative;
+            transition: color 0.3s;
+        }
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: #fff;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+        .navbar a:hover::after {
+            width: 100%;
+            left: 0;
+            background: #04AA6D;
+        }
+        .navbar a:hover {
+            color: #fff;
+        }
+        .submenu {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .navbar li {
+            position: relative;
+            display: inline-block;
+        }
+        .navbar li:hover .submenu {
+            display: block;
+        }
+        .submenu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            transition: background-color 0.3s;
+        }
+        .submenu a:hover {
+            background-color: #444;
+        }
+        .content {
+            margin-top: 60px;
+            padding: 20px;
+        }
+        .carousel-item {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+        .carousel-caption {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .card {
+            margin: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .announcements, .courses, .dashboard {
+            padding: 20px 0;
+        }
+        .announcements h2, .courses h2, .dashboard h2 {
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+        .footer {
+            background-color: #222;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .footer-box {
+            flex: 1;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            background-color: #333;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .footer-box:hover {
+            background-color: #444;
+            transform: translateY(-5px);
+        }
+        .footer a {
+            color: #04AA6D;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer a:hover {
+            color: #fff;
+        }
+        .footer ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .footer ul li {
+            margin: 10px 0;
+        }
+        .footer .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .footer .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 24px;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .footer .social-icons a:hover {
+            color: #04AA6D;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <li>
+            <a href="#" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li>
+            <a href="/student/dashboard" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> Dashboard</a>
+            <div class="submenu">
+                <a href="/student/dashboard">Enrolled class</a>
+                <a href="/student/finalyearproject">Final Year Project</a>
+                <a href="/student/assignment">Assignment</a>
+                <a href="/student/exam">Exam</a>
+            </div>
+        </li>
+        <li>
+            <a href="/student/course" class="nav-link"><i class="fas fa-book"></i> Course</a>
+            <div class="submenu">
+                <a href="/student/course">New course</a>
+                <a href="/student/courseregistered">Registered course</a>
+            </div>
+        </li>
+        <li>
+            <a href="/student/announcements" class="nav-link"><i class="fas fa-bullhorn"></i> Announcements</a>
+        </li>
+        <li>
+            <a href="/login" class="nav-link"><i class="fas fa-user"></i> Login</a>
+        </li>
+    </div>
+    <div class="content">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active" style="background-image: url('https://via.placeholder.com/1200x400');">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Welcome to Our Learning Management System</h5>
+                        <p>Empowering students and teachers with innovative tools and resources.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" style="background-image: url('https://via.placeholder.com/1200x400');">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Stay Organized and On Track</h5>
+                        <p>Manage your courses, assignments, and exams all in one place.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" style="background-image: url('https://via.placeholder.com/1200x400');">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Engage and Collaborate</h5>
+                        <p>Join discussions, share ideas, and connect with classmates and instructors.</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="announcements">
+            <h2>Latest Announcements</h2>
+            <div class="card">
+                <img src="https://via.placeholder.com/400x200" alt="Announcement 1">
+                <div class="card-body">
+                    <h5 class="card-title">Announcement Title 1</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac gravida nibh.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/400x200" alt="Announcement 2">
+                <div class="card-body">
+                    <h5 class="card-title">Announcement Title 2</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac gravida nibh.</p>
+                </div>
+            </div>
+        </div>
+        <div class="courses">
+            <h2>Popular Courses</h2>
+            <div class="card">
+                <img src="https://via.placeholder.com/400x200" alt="Course 1">
+                <div class="card-body">
+                    <h5 class="card-title">Course Title 1</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac gravida nibh.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/400x200" alt="Course 2">
+                <div class="card-body">
+                    <h5 class="card-title">Course Title 2</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac gravida nibh.</p>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard">
+            <h2>Student Dashboard</h2>
+            <div class="card">
+                <img src="https://via.placeholder.com/400x200" alt="Dashboard 1">
+                <div class="card-body">
+                    <h5 class="card-title">Dashboard Feature 1</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac gravida nibh.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://via.placeholder.com/400x200" alt="Dashboard 2">
+                <div class="card-body">
+                    <h5 class="card-title">Dashboard Feature 2</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac gravida nibh.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-box">
+                <h4>About Us</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac gravida nibh.</p>
+            </div>
+            <div class="footer-box">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li>Email: info@example.com</li>
+                    <li>Phone: +123 456 7890</li>
+                    <li>Address: 123 LMS Street, Education City</li>
+                </ul>
+            </div>
+            <div class="footer-box">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" class="fab fa-facebook"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="#" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
