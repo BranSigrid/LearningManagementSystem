@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/dashboard.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .dashboard-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .card-title {
+            color: #007bff;
+        }
+        .card-body p, .card-body ul {
+            color: #555;
+        }
+        #clock, #month {
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .card-link {
+            font-weight: bold;
+        }
+        .card-link:hover {
+            text-decoration: underline;
+        }
+        .list-unstyled li {
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4 text-center">Welcome to Your Dashboard</h1>
+        <div class="row mb-4">
+            <div class="col-md-12 d-flex justify-content-end">
+                <div id="month" class="mr-4"></div>
+                <div id="clock"></div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Profile Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Your Profile</h5>
+                        <!-- Link to the profile page -->
+                        <a href="/student/profile" class="card-link">View/Edit Profile</a>
+                        <!-- Profile details -->
+                        <p>Name: John Doe</p>
+                        <p>Email: john.doe@example.com</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Courses Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Your Courses</h5>
+                        <ul class="list-unstyled">
+                            <li>Course 1</li>
+                            <li>Course 2</li>
+                            <li>Course 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Announcements Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Announcements</h5>
+                        <ul class="list-unstyled">
+                            <li>Announcement 1</li>
+                            <li>Announcement 2</li>
+                            <li>Announcement 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Upcoming Events Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Upcoming Events</h5>
+                        <ul class="list-unstyled">
+                            <li>Event 1</li>
+                            <li>Event 2</li>
+                            <li>Event 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Attendance Performance Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Attendance Performance</h5>
+                        <p>Attendance Rate: 90%</p>
+                        <p>Classes Missed: 3</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/assets/js/student.js"></script>
+    <!-- Bootstrap JS (optional, if needed for certain components) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Additional JavaScript for the clock -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function updateClock() {
+                const now = new Date();
+                const hours = now.getHours().toString().padStart(2, '0');
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                const seconds = now.getSeconds().toString().padStart(2, '0');
+                document.getElementById('clock').textContent = `Time: ${hours}:${minutes}:${seconds}`;
+            }
+
+            function updateMonth() {
+                const now = new Date();
+                const options = { month: 'long', year: 'numeric' };
+                const month = now.toLocaleDateString(undefined, options);
+                document.getElementById('month').textContent = `Month: ${month}`;
+            }
+
+            setInterval(updateClock, 1000);
+            updateMonth();
+        });
+    </script>
+</body>
+</html>

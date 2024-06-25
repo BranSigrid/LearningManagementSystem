@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMSkills</title>
+    <!-- Logo Website -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            background-color: #555;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            z-index: 1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            text-align: center;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            display: block;
+            margin-top: 5px;
+            right: 0;
+            background: #fff;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+            left: 0;
+            background: #04AA6D;
+        }
+
+        .navbar a:hover {
+            color: #fff;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            z-index: 1;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar li {
+            position: relative;
+            display: inline-block;
+        }
+
+        .navbar li:hover .submenu {
+            display: block;
+        }
+
+        .submenu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .submenu a:hover {
+            background-color: #444;
+        }
+
+        .content {
+            margin-top: 60px;
+            padding: 20px;
+        }
+
+        .carousel-item {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .carousel-caption {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            margin: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .announcements, .courses, .dashboard {
+            padding: 20px 0;
+        }
+
+        .announcements h2, .courses h2, .dashboard h2 {
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .footer {
+            background-color: #222;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .footer-box {
+            flex: 1;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            background-color: #333;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .footer-box:hover {
+            background-color: #444;
+            transform: translateY(-5px);
+        }
+
+        .footer a {
+            color: #04AA6D;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #fff;
+        }
+
+        .footer ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer ul li {
+            margin: 10px 0;
+        }
+
+        .footer .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .footer .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 24px;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .footer .social-icons a:hover {
+            color: #04AA6D;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <li>
+            <a href="#" class="nav-link"><i class="fas fa-home"></i> Home</a>
+        </li>
+        <li>
+            <a href="/student/dashboard" class="nav-link"><i class="fas fa-chalkboard-teacher"></i> Dashboard</a>
+            <div class="submenu">
+                <a href="/student/dashboard">Enrolled class</a>
+                <a href="/student/finalyearproject">Final Year Project</a>
+                <a href="/student/elogbook">Internship</a>
+            </div>
+        </li>
+        <li>
+            <a href="/student/schedule" class="nav-link"><i class="fas fa-calendar-alt"></i> Schedule</a>
+        </li>
+        <li>
+            <a href="/student/profile" class="nav-link"><i class="fas fa-user"></i> Profile</a>
+            <div class="submenu">
+                <a href="/student/profile" class="nav-link">View Profile</a>
+            </div>
+        </li>
+    </div>
+    <div class="content">
+        <!-- Bootstrap Carousel -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="5000">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active" style="background-image: url('https://via.placeholder.com/800x400?text=Slide+1');">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Welcome to LMSkills</h5>
+                        <p>Your journey to knowledge starts here.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" style="background-image: url('https://via.placeholder.com/800x400?text=Slide+2');">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Interactive Courses</h5>
+                        <p>Learn with our extensive library of courses.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" style="background-image: url('https://via.placeholder.com/800x400?text=Slide+3');">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Join Our Community</h5>
+                        <p>Connect with learners around the world.</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+        <!-- Announcements Section -->
+        <div class="announcements">
+            <h2>Announcements</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400x200?text=Announcement+1" class="card-img-top" alt="Announcement 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Guidelines</h5>
+                            <p class="card-text">Updated guidelines for the upcoming semester.</p>
+                            <a href="/student/guidelines" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400x200?text=Announcement+2" class="card-img-top" alt="Announcement 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Team Building 2024</h5>
+                            <p class="card-text">Join us for a series of team-building activities.</p>
+                            <a href="/student/teambuilding" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400x200?text=Announcement+3" class="card-img-top" alt="Announcement 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Useful resources for student</h5>
+                            <p class="card-text">Explore our curated list of useful resources.</p>
+                            <a href="/student/resources" class="btn btn-primary">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses Section -->
+        <div class="courses">
+            <h2>Popular Courses</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400x200?text=Course+1" class="card-img-top" alt="Course 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Course Title 1</h5>
+                            <p class="card-text">Brief description of Course 1.</p>
+                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400x200?text=Course+2" class="card-img-top" alt="Course 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Course Title 2</h5>
+                            <p class="card-text">Brief description of Course 2.</p>
+                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400x200?text=Course+3" class="card-img-top" alt="Course 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Course Title 3</h5>
+                            <p class="card-text">Brief description of Course 3.</p>
+                            <a href="#" class="btn btn-primary">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div class="dashboard">
+            <h2>Your Dashboard</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400x200?text=Dashboard+1" class="card-img-top" alt="Dashboard 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Enrolled Courses</h5>
+                            <p class="card-text">View and manage your enrolled courses.</p>
+                            <a href="/student/dashboard" class="btn btn-primary">Go to Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400x200?text=Dashboard+2" class="card-img-top" alt="Dashboard 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Final Year Project</h5>
+                            <p class="card-text">Track your final year project progress.</p>
+                            <a href="/student/finalyearproject" class="btn btn-primary">Track Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/400x200?text=Dashboard+3" class="card-img-top" alt="Dashboard 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Internship</h5>
+                            <p class="card-text">Check and manage your internship details.</p>
+                            <a href="/student/internship" class="btn btn-primary">Manage Internship</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-box">
+                <h4>About LMSkills</h4>
+                <p>Providing quality education and resources for learners worldwide.</p>
+            </div>
+            <div class="footer-box">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-box">
+                <h4>Contact Us</h4>
+                <p>Email: info@lmskills.com</p>
+                <p>Phone: +123 456 7890</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <p>&copy; 2023 LMSkills. All rights reserved.</p>
+    </footer>
+
+    <!-- jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
